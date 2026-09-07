@@ -7,7 +7,7 @@ import { computeBoundsTree, disposeBoundsTree, acceleratedRaycast } from './vend
 THREE.BufferGeometry.prototype.computeBoundsTree = computeBoundsTree;
 THREE.BufferGeometry.prototype.disposeBoundsTree = disposeBoundsTree;
 THREE.Mesh.prototype.raycast = acceleratedRaycast;
-const ASSET_V = '3';
+const ASSET_V = '4';
 
 const $ = (s) => document.querySelector(s);
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -292,8 +292,8 @@ const VIEWPOINTS = {
 const ray = new THREE.Raycaster(); ray.far = 60;
 const tmpV = new THREE.Vector3(), tmpD = new THREE.Vector3(), fwd = new THREE.Vector3(), right = new THREE.Vector3();
 
-function groundHeight(x, z, fromY) {
-  ray.set(tmpV.set(x, fromY + 1.2, z), tmpD.set(0, -1, 0)); ray.far = 60;
+function groundHeight(x, z, fromY, far = 60) {
+  ray.set(tmpV.set(x, fromY + 1.2, z), tmpD.set(0, -1, 0)); ray.far = far; ray.firstHitOnly = true;
   const hits = ray.intersectObjects(walkables, false);
   return hits.length ? hits[0].point.y : null;
 }
@@ -345,6 +345,8 @@ addEventListener('keydown', (e) => {
   if (state.mode !== 'walk') return;
   keys.add(e.code);
   if (e.code === 'KeyF') fly = !fly;
+  if (e.code === 'KeyN') setNight(state.nightTarget === 0, true);
+  if (e.code === 'KeyX') { state.section = !state.section; applySection(); }
   const vp = { Digit1: 'forecourt', Digit2: 'terrace', Digit3: 'upper', Digit4: 'tomb', Digit5: 'vault' }[e.code];
   if (vp) goTo(vp);
   if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.code)) e.preventDefault();
@@ -368,6 +370,16 @@ joystick($('#joy-left'), joy.move); joystick($('#joy-right'), joy.look);
 
 function stepWalk(dt) {
   dt = Math.min(dt, 0.05);
+  let falling = false;
+  if (!fly) {
+    // gravity: settle onto whatever is below, even after switching out of fly mode in mid-air
+    const g = groundHeight(camera.position.x, camera.position.z, camera.position.y, 600);
+    if (g !== null) {
+      const target = g + EYE;
+      if (camera.position.y > target + 0.03) { camera.position.y = Math.max(target, camera.position.y - 16 * dt); falling = true; }
+      else if (camera.position.y < target - 0.03) camera.position.y = target;
+    }
+  }
   // look (touch)
   if (joy.look.x || joy.look.y) {
     camera.rotation.y -= joy.look.x * 1.6 * dt; camera.rotation.x -= joy.look.y * 1.2 * dt;
@@ -385,7 +397,7 @@ function stepWalk(dt) {
   const run = keys.has('ShiftLeft') || keys.has('ShiftRight');
   const speed = fly ? FLY : (run ? RUN : WALK);
   const moving = mx || mz || my;
-  if (!moving) return false;
+  if (!moving) return falling;
   camera.getWorldDirection(fwd);
   if (!fly) { fwd.y = 0; }
   fwd.normalize(); right.crossVectors(fwd, camera.up).normalize();

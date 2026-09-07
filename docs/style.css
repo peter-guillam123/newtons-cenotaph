@@ -82,7 +82,7 @@ button.link { background: none; border: none; padding: 0; min-height: 0; color: 
 .hint { font-family: var(--sans); color: var(--dim); font-size: .85rem; }
 .small { font-family: var(--sans); font-size: .8rem; color: var(--muted); }
 .title-card { max-width: 38rem; }
-body.walk .story, body.walk .panel, body.walk .topbar .seg, body.walk #btn-section { display: none; }
+body.walk .story, body.walk .panel { display: none; }
 body.pose .story, body.pose .panel { display: none; }
 
 /* panels below the story */

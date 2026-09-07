@@ -10,7 +10,7 @@
 <meta property="og:description" content="Boullée's unbuilt monument to Newton, rebuilt from his drawings. Walk through it.">
 <meta property="og:image" content="media/poster.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='15' r='11' fill='%23c8a862'/%3E%3Crect x='2' y='22' width='28' height='6' fill='%23ece6da'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="style.css?v=4">
 <script type="importmap">
 { "imports": { "three": "./vendor/three.module.js", "three/addons/": "./vendor/addons/" } }
 </script>
@@ -180,10 +180,12 @@
       <li>The cypresses are about 1,900 instanced spindles. Botanists should look away.</li>
     </ul>
     <h3>How the page works</h3>
-    <p>Scrolling drives a camera along a path through the building. "Walk" hands you the camera: WASD or arrow keys, Shift to hurry, F to fly, the number keys 1 to 5 to jump between viewpoints, Escape to get out. On a phone the two joysticks do the same. "Section" cuts the building in half along the line Boullée used for his sections. Day and night switch between his two lighting effects. It all runs on three.js with no build step, so the source is readable as it stands.</p>
+    <p>Scrolling drives a camera along a path through the building. "Walk" hands you the camera: WASD or arrow keys, Shift to hurry, F to fly, N for night, X for the section, the number keys 1 to 5 to jump between viewpoints, Escape to get out. On a phone the two joysticks do the same and the buttons stay in the top bar. "Section" cuts the building in half along the line Boullée used for his sections. Day and night switch between his two lighting effects. It all runs on three.js with no build step, so the source is readable as it stands.</p>
 
     <h2 id="changelog">Diary</h2>
     <dl class="diary">
+      <dt><time datetime="2026-09-07">7 September 2026</time> Walk fixes</dt>
+      <dd>Gravity now applies whenever you are not flying, so leaving fly mode in mid-air drops you rather than leaving you hanging. The tunnel approach was rebuilt so the stair, landing and mound no longer share a plane, which was the flickering on the ground at the arch. N and X switch night and section while walking, and the buttons stay in the top bar.</dd>
       <dt class="milestone"><time datetime="2026-09-07">7 September 2026</time> The page</dt>
       <dd>Scroll-driven walkthrough, first-person mode with ground-following and wall stops, a live section cut, day and night, and the drawings fadeable over the live view from their own viewpoints. Three Eevee flybys for those who prefer to watch. Hosted on GitHub Pages.</dd>
       <dt><time datetime="2026-09-07">7 September 2026</time> Films</dt>
@@ -211,7 +213,7 @@
     <button type="button" data-vp="tomb">4 Tomb</button>
     <button type="button" data-vp="vault">5 Vault</button>
   </div>
-  <p class="hud-help desktop-only">WASD move · Shift run · F fly · Esc to leave</p>
+  <p class="hud-help desktop-only">WASD move · Shift run · F fly · N night · X section · Esc to leave</p>
   <button type="button" id="walk-exit" class="touch-only">Leave</button>
 </div>
 <div id="joy-left" class="joy touch-only" hidden><div class="knob"></div></div>
@@ -221,6 +223,6 @@
   <p>Your browser can't run the 3D scene, so the films below will have to stand in for it.</p>
 </div>
 
-<script type="module" src="app.js?v=3"></script>
+<script type="module" src="app.js?v=4"></script>
 </body>
 </html>
