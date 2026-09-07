@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Newton's cenotaph</title>
+<meta name="description" content="Étienne-Louis Boullée's 1784 cenotaph for Isaac Newton, rebuilt in 3D from the six surviving drawings. Scroll through it, then walk it yourself.">
+<meta name="theme-color" content="#0c0c0f">
+<meta property="og:title" content="Newton's cenotaph">
+<meta property="og:description" content="Boullée's unbuilt monument to Newton, rebuilt from his drawings. Walk through it.">
+<meta property="og:image" content="media/poster.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='15' r='11' fill='%23c8a862'/%3E%3Crect x='2' y='22' width='28' height='6' fill='%23ece6da'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css?v=3">
+<script type="importmap">
+{ "imports": { "three": "./vendor/three.module.js", "three/addons/": "./vendor/addons/" } }
+</script>
+</head>
+<body>
+<a class="skip" href="#story">Skip to the text</a>
+
+<div id="loader" role="status" aria-live="polite">
+  <img src="media/poster.jpg" alt="" class="poster">
+  <div class="loader-card">
+    <p class="loader-title">Newton's cenotaph</p>
+    <p class="loader-sub">Loading the model, about 3 MB</p>
+    <div class="bar" aria-hidden="true"><div id="bar-fill"></div></div>
+    <p id="loader-msg" class="loader-msg"></p>
+  </div>
+</div>
+
+<canvas id="scene" aria-hidden="true"></canvas>
+
+<header class="topbar">
+  <a class="brand" href="#top">Newton's cenotaph</a>
+  <nav class="tools" aria-label="Scene controls">
+    <div class="seg" role="group" aria-label="Lighting">
+      <button id="btn-day" type="button" aria-pressed="true">Day</button>
+      <button id="btn-night" type="button" aria-pressed="false">Night</button>
+    </div>
+    <button id="btn-section" type="button" aria-pressed="false" title="Cut the building in half">Section</button>
+    <button id="btn-walk" type="button" class="primary">Walk</button>
+  </nav>
+</header>
+
+<main id="story" class="story">
+  <section class="chapter" id="top">
+    <div class="card title-card">
+      <p class="kicker">Étienne-Louis Boullée, 1784</p>
+      <h1>Newton's cenotaph</h1>
+      <p class="lede">A monument to Isaac Newton that was drawn, admired, and never built. This is a reconstruction from the six drawings that survive, which you can scroll through and then walk.</p>
+      <p class="hint" aria-hidden="true">Scroll ↓</p>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="card">
+      <h2>A sphere 150 metres across</h2>
+      <p>Boullée wanted a monument with nothing on it. No columns, no statue, no inscription you could read from the ground. A sphere, because for him the sphere was the perfect form, and an enormous one: taller than the Great Pyramid, wider than St Paul's is high.</p>
+      <p>He called the design a cenotaph rather than a tomb because Newton's body was already in Westminster Abbey. This was to be an idea of Newton, at the scale of the idea.</p>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="card">
+      <h2>The base</h2>
+      <p>The sphere sits in a drum of masonry, cut open at the front so the globe seems to rest on the earth. Two terraces of cypresses, the Roman tree of mourning, ring it, with a third ring at ground level. A vaulted gallery runs inside the drum, visible only in the section drawing.</p>
+      <p>Boullée left no dimensions, so every proportion here is measured off his drawings. Where his own drawings disagree with each other, and they do, the elevations won.</p>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="card">
+      <h2>The way in</h2>
+      <p>A single small arch at the foot of the sphere. The visitor is meant to be dwarfed before being enclosed, then to pass through a long tunnel into the dark.</p>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="card">
+      <h2>The tunnel</h2>
+      <p>The tunnel runs about thirty metres through the shell of the sphere. Boullée drew it as a black hole in a wall of light; the drama was in the contrast.</p>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="card">
+      <h2>The tomb</h2>
+      <p>It opens at the bottom of the sphere, onto a mound with Newton's sarcophagus on top. That is the only object in the whole interior. Boullée wrote that he wanted to surround Newton with his own discovery, which meant putting him inside the sky.</p>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="card">
+      <h2>Day: a sky made of holes</h2>
+      <p>This is the trick. Thousands of holes pierce the shell, so by day the sun comes through as points and the visitor stands under a night sky at noon. Boullée drew the constellations in on the section. It is, in effect, a planetarium about 140 years early.</p>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="card">
+      <h2>Night: the lamp</h2>
+      <p>After dark the holes go black and an armillary sphere hung at the centre is lit instead: a sun in the middle of Newton's universe. Boullée labelled the two drawings <em>effet de jour</em> and <em>effet de nuit</em>.</p>
+      <p>Whether one lamp could light a stone sphere 150 metres across is a fair question. He was not a man to be stopped by a fair question.</p>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="card">
+      <h2>Walk it</h2>
+      <p>Take control and go where you like. Keyboard on a desktop, two joysticks on a phone, and shortcuts to the forecourt, the terraces, the tomb and the vault.</p>
+      <p><button type="button" class="primary big" id="btn-walk-2">Take control</button></p>
+      <p class="small">The model follows the drawings; where they run out (the stairs round the sphere, the door itself) I have guessed. The About section below says where.</p>
+    </div>
+  </section>
+</main>
+
+<section class="panel" id="compare">
+  <div class="panel-inner">
+    <h2>Against the drawings</h2>
+    <p class="intro">Boullée's wash drawings next to the model from roughly the same spot. "View from here" moves the live camera to the drawing's viewpoint and lets you fade the drawing over it, which is the honest way to show how close the reconstruction gets and where it doesn't.</p>
+    <div class="compare-grid">
+      <figure class="cmp">
+        <div class="pair">
+          <img src="media/drawing_f2_elevation_day.jpg" alt="Boullée's perspective elevation of the cenotaph, 1784: the sphere rising from a cylindrical base ringed with cypress trees" loading="lazy">
+          <img src="media/render_elevation.jpg" alt="The model rendered from the same viewpoint" loading="lazy">
+        </div>
+        <figcaption>Elevation, day effect. <button type="button" class="link" data-pose="elevation">View from here</button></figcaption>
+      </figure>
+      <figure class="cmp">
+        <div class="pair">
+          <img src="media/drawing_f4_section_day_effect.jpg" alt="Boullée's section through the sphere by day, its interior a dark starry sky" loading="lazy">
+          <img src="media/render_section.jpg" alt="The model cut in half from the same viewpoint" loading="lazy">
+        </div>
+        <figcaption>Section, day effect. <button type="button" class="link" data-pose="section">View from here</button></figcaption>
+      </figure>
+      <figure class="cmp">
+        <div class="pair">
+          <img src="media/drawing_f6_interior_view.jpg" alt="Boullée's interior view: a round starry vault with the sarcophagus small at the bottom" loading="lazy">
+          <img src="media/render_interior.jpg" alt="The model's interior from the tunnel mouth" loading="lazy">
+        </div>
+        <figcaption>Interior view. <button type="button" class="link" data-pose="interior">View from here</button></figcaption>
+      </figure>
+    </div>
+    <p class="small">Drawings: Bibliothèque nationale de France, Département des estampes, RÉS. HA 57, via Gallica. Non-commercial reuse with credit.</p>
+  </div>
+</section>
+
+<section class="panel" id="films">
+  <div class="panel-inner">
+    <h2>Three short films</h2>
+    <p class="intro">Rendered from the same model, for anyone who would rather watch than drive.</p>
+    <div class="films">
+      <figure>
+        <video controls muted playsinline preload="none" poster="media/poster.jpg" src="media/approach.mp4"></video>
+        <figcaption>The approach: along the axis, under the notch, through the tunnel to the tomb.</figcaption>
+      </figure>
+      <figure>
+        <video controls muted playsinline preload="none" poster="media/render_interior.jpg" src="media/vault.mp4"></video>
+        <figcaption>The vault, as day turns to night.</figcaption>
+      </figure>
+      <figure>
+        <video controls muted playsinline preload="none" poster="media/render_elevation.jpg" src="media/orbit.mp4"></video>
+        <figcaption>Half an orbit at terrace height.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="about">
+  <div class="panel-inner prose">
+    <h2>About</h2>
+    <p>This is a 3D reconstruction of Étienne-Louis Boullée's <em>Cénotaphe à Newton</em> of 1784, one of the most reproduced architectural drawings ever made and one of the least built. It was modelled in Blender, in conversation with Claude Code, from the six drawings held by the Bibliothèque nationale de France: a plan, two perspective elevations (day and night), two sections (day effect and night effect) and an interior view. The renders on this page are Cycles; the walkthrough is the same model exported to the browser and lit in real time, which is why it looks cleaner and a bit less atmospheric than the stills.</p>
+    <p>Boullée gave no dimensions. The literature agrees on a sphere of about 150 metres, so I fixed that and measured everything else as a proportion of the sphere's radius off the drawings: the drum at 1.55 radii across and half a radius high, the upper tier at 1.25 radii, the cypress rings at 1.1, 1.4 and 1.9 radii, the shell five metres thick. The full table is in the project's README.</p>
+    <h3>Where I had to choose</h3>
+    <ul>
+      <li>The two sections draw the drum wider relative to the sphere than the two elevations do, roughly 1.77 radii against 1.57. The plan sides with the elevations, so I did too.</li>
+      <li>The elevations show the sphere sitting in a concave cradle with the front cut open. The sections show masonry hugging the sphere with no gap. I modelled the cradle, because that is what you would see.</li>
+      <li>The plan sketches curving stairs round the sphere. They are not modelled. The monumental stair up the front of the upper tier is.</li>
+      <li>The stars are a material trick (glowing points on the inner surface), not several thousand real holes. Boullée would probably have approved of the economy.</li>
+      <li>The cypresses are about 1,900 instanced spindles. Botanists should look away.</li>
+    </ul>
+    <h3>How the page works</h3>
+    <p>Scrolling drives a camera along a path through the building. "Walk" hands you the camera: WASD or arrow keys, Shift to hurry, F to fly, the number keys 1 to 5 to jump between viewpoints, Escape to get out. On a phone the two joysticks do the same. "Section" cuts the building in half along the line Boullée used for his sections. Day and night switch between his two lighting effects. It all runs on three.js with no build step, so the source is readable as it stands.</p>
+
+    <h2 id="changelog">Diary</h2>
+    <dl class="diary">
+      <dt class="milestone"><time datetime="2026-09-07">7 September 2026</time> The page</dt>
+      <dd>Scroll-driven walkthrough, first-person mode with ground-following and wall stops, a live section cut, day and night, and the drawings fadeable over the live view from their own viewpoints. Three Eevee flybys for those who prefer to watch. Hosted on GitHub Pages.</dd>
+      <dt><time datetime="2026-09-07">7 September 2026</time> Films</dt>
+      <dd>Cycles takes three minutes a frame inside the sphere, so the flybys are Eevee at a few seconds a frame. Slightly flatter light, same building.</dd>
+      <dt class="milestone"><time datetime="2026-09-07">7 September 2026</time> The model</dt>
+      <dd>Built from the six Gallica scans in an afternoon, most of which went on discovering that Blender's "exact" boolean solver was quietly returning uncut geometry and that I had built the section cutter inside out. Five presentation renders: elevation, interior by day, interior by night, section, plan.</dd>
+    </dl>
+    <p class="small">Chris Moran, 2026. Model, page and films are free to reuse with credit. Boullée's drawings are reproduced from Gallica under the BnF's non-commercial terms.</p>
+  </div>
+</section>
+
+<div id="pose-overlay" hidden>
+  <img id="pose-img" src="" alt="">
+  <div class="pose-controls">
+    <label>Drawing <input id="pose-range" type="range" min="0" max="100" value="55" aria-label="Fade between the drawing and the model"></label>
+    <button type="button" id="pose-close">Back to the story</button>
+  </div>
+</div>
+
+<div id="walk-hud" hidden>
+  <div class="hud-row">
+    <button type="button" data-vp="forecourt">1 Forecourt</button>
+    <button type="button" data-vp="terrace">2 Terrace</button>
+    <button type="button" data-vp="upper">3 Upper terrace</button>
+    <button type="button" data-vp="tomb">4 Tomb</button>
+    <button type="button" data-vp="vault">5 Vault</button>
+  </div>
+  <p class="hud-help desktop-only">WASD move · Shift run · F fly · Esc to leave</p>
+  <button type="button" id="walk-exit" class="touch-only">Leave</button>
+</div>
+<div id="joy-left" class="joy touch-only" hidden><div class="knob"></div></div>
+<div id="joy-right" class="joy touch-only" hidden><div class="knob"></div></div>
+
+<div id="nowebgl" hidden>
+  <p>Your browser can't run the 3D scene, so the films below will have to stand in for it.</p>
+</div>
+
+<script type="module" src="app.js?v=3"></script>
+</body>
+</html>

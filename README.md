@@ -14,6 +14,15 @@ number here is a proportion measured off the drawings and scaled to the
   `Blender -b newton_cenotaph.blend -P render_views.py` (add `-- --quick` for a fast preview).
 - `renders/` - exterior elevation, interior by day (stars), interior by night (armillary lamp),
   cross-section, plan.
+- `render_flyby.py` - Eevee flyby clips (approach, vault, orbit) into `docs/media/`. The Blender
+  build has no video encoder, so it writes PNG frames and calls ffmpeg.
+- `export_web.py` - exports the model for the web page: `docs/assets/cenotaph.glb` plus JSON for
+  the cypress instances and the star points.
+- `docs/` - the web page, served by GitHub Pages. Plain HTML, CSS and one ES module on top of a
+  vendored three.js (no build step). `index.html` is the story, `app.js` the scene: scroll-driven
+  camera path, first-person walk mode with ground-following and wall stops (three-mesh-bvh for the
+  raycasts), a live section cut via a clipping plane, day and night, and the drawings fadeable over
+  the live view from their own viewpoints.
 
 ## What the drawings show, and what I took from each
 
