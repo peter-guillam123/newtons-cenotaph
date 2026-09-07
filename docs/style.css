@@ -139,6 +139,9 @@ body.pose .story, body.pose .panel { display: none; }
 }
 @media (max-width: 720px) {
   body { font-size: 16px; }
+  .topbar { padding-top: .5rem; padding-bottom: .5rem; }
+  .tools { gap: .35rem; }
+  .tools button, .seg button { font-size: .76rem; padding: .35rem .6rem; }
   .chapter { align-items: flex-end; padding: 5rem .9rem 2.5rem; }
   .chapter:nth-child(odd), .chapter:nth-child(even) { justify-content: center; }
   .card { padding: 1.1rem 1.2rem; }
